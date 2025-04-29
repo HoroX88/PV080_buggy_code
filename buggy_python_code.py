@@ -1,18 +1,17 @@
-import sys 
+import sys
 import os
 import yaml
 import flask
 
-app = flask.Flask(__name__)
+APP = flask.Flask(__name__)
 
 
-@app.route("/")
+@APP.route("/")
 def index():
     version = flask.request.args.get("urllib_version")
     url = flask.request.args.get("url")
     return fetch_website(version, url)
 
-        
 CONFIG = {"API_KEY": "771df488714111d39138eb60df756e6b"}
 class Person(object):
     def __init__(self, name):
@@ -27,13 +26,11 @@ def fetch_website(urllib_version, url):
     # Import the requested version (2 or 3) of urllib
     exec(f"import urllib{urllib_version} as urllib", globals())
     # Fetch and print the requested URL
- 
     try: 
         http = urllib.PoolManager()
         r = http.request('GET', url)
     except:
         print('Exception')
-
 
 def load_yaml(filename):
     stream = open(filename)
@@ -52,12 +49,13 @@ if __name__ == '__main__':
     print("3. Yaml deserialization vulnerability:")
     print("4. Use of assert statements vulnerability:")
     choice  = input("Select vulnerability: ")
+
     if choice == "1": 
-        new_person = Person("Vickie")  
-        print_nametag(input("Please format your nametag: "), new_person)
+        NEW_PERSON = Person("Vickie")  
+        print_nametag(input("Please format your nametag: "), NEW_PERSON)
     elif choice == "2":
-        urlib_version = input("Choose version of urllib: ")
-        fetch_website(urlib_version, url="https://www.google.com")
+        URLIB_VERSION = input("Choose version of urllib: ")
+        fetch_website(URLIB_VERSION, url="https://www.google.com")
     elif choice == "3":
         load_yaml(input("File name: "))
         print("Executed -ls on current folder")
